@@ -41,4 +41,4 @@ jobs:
           DB_PASSWORD: ${{ vars.DB_PASSWORD }}
           DB_NAME: ${{ vars.DB_NAME }}
           DB_PORT: ${{ vars.DB_PORT }}
-        run: python lme-pipeline/src/scraper.py
+        run: python lme-pipeline/src/scraper.py ${{ inputs.reference_date }}
