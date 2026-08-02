@@ -43,9 +43,6 @@ def run_scraper():
         )
 
         logging.info(f"Tabelas encontradas: {len(tables)}")
-        for tab in len(tables):
-            logging.info(f"Tabela {tab} : {tables[tab]}")
-
 
         if not tables:
             raise RuntimeError("Tabela LME não encontrada na página")
