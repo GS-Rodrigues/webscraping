@@ -72,7 +72,14 @@ def run_scraper():
                 except ValueError:
                     continue
         conn.commit()
+        print("COMMIT REALIZADO")
 
+        cursor.execute(
+            "SELECT COUNT(*) FROM valores_scraping_lme"
+        )
+
+        print("TOTAL NO BANCO:", cursor.fetchone()[0])
+        
     except Exception as e:
         conn.rollback()
         print("Erro no scraping LME:", e)
