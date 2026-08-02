@@ -3,6 +3,8 @@ import psycopg2
 
 def insert_row(cursor, data_referencia, value):
     try:
+        print(f"INSERINDO: {data_referencia} | {value}")
+
         cursor.execute("""
             INSERT INTO valores_scraping_lme (data_referencia, valor)
             VALUES (%s, %s)
