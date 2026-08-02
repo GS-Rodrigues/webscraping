@@ -69,7 +69,7 @@ def run_scraper():
                     date_clean = date_treatment.parse_data_br(month_year, yesterday.year)
                     if date_clean.month == yesterday.month:
                         aluminium = float(aluminium)
-                        insert_row(date_clean, aluminium)
+                        insert_row(cursor, date_clean, aluminium)
                         logging.info(f"Inserindo {aluminium} em {date_clean}")
 
                 except ValueError:
