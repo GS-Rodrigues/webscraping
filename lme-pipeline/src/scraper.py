@@ -37,10 +37,10 @@ def run_scraper():
     cursor = conn.cursor()
 
     try:
-        yesterday = get_reference_date()
-        logging.info(f"Data de referência: {yesterday}")
-        
-        data_str = yesterday.strftime("%m-%Y")
+        reference_date = get_reference_date()
+        logging.info(f"Data de referência: {reference_date}")
+
+        data_str = reference_date.strftime("%m-%Y")
 
         url = f"https://shockmetais.com.br/lme/{data_str}"
         response = requests.get(url, timeout=10)
@@ -76,8 +76,8 @@ def run_scraper():
 
                 try:
                     aluminium = float(raw_value.replace(" ", "").replace("\n", "").replace(",", ""))
-                    date_clean = date_treatment.parse_data_br(month_year, yesterday.year)
-                    if date_clean.month == yesterday.month:
+                    date_clean = date_treatment.parse_data_br(month_year, reference_date.year)
+                    if date_clean.month == reference_date.month:
                         aluminium = float(aluminium)
                         insert_row(cursor, date_clean, aluminium)
                         logging.info(f"Inserindo {aluminium} em {date_clean}")
