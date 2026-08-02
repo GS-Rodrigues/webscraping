@@ -1,10 +1,11 @@
 import requests
 from Insert import insert_row
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from Db_connection import get_connection
 import date_treatment
 from bs4 import BeautifulSoup
 import logging
+import sys
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,13 +21,25 @@ def get_last_business_day():
 
     return today
 
+def get_reference_date():
+
+    if len(sys.argv) > 1:
+        return datetime.strptime(
+            sys.argv[1],
+            "%d-%m-%Y"
+        ).date()
+
+    return (datetime.now() - timedelta(days=1)).date()
+
 def run_scraper():
 
     conn = get_connection()
     cursor = conn.cursor()
 
     try:
-        yesterday = get_last_business_day()
+        yesterday = get_reference_date()
+        logging.info(f"Data de referência: {yesterday}")
+        
         data_str = yesterday.strftime("%m-%Y")
 
         url = f"https://shockmetais.com.br/lme/{data_str}"
