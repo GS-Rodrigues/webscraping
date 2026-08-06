@@ -3,8 +3,11 @@ name: Run Web Scraper Daily
 on:
   schedule:
     - cron: "0 17 * * *"   # roda todo dia às 19h no Brasil (UTC-3)
-  workflow_dispatch:       # permite rodar manualmente
-
+  workflow_dispatch:
+    inputs:
+      reference_date:
+        description: "Data no formato YYYY-MM-DD"
+        required: false
 jobs:
   scrape:
     runs-on: windows-latest
@@ -37,4 +40,4 @@ jobs:
           DB_PASSWORD: ${{ vars.DB_PASSWORD }}
           DB_NAME: ${{ vars.DB_NAME }}
           DB_PORT: ${{ vars.DB_PORT }}
-        run: python dollar-pipeline/src/scraper.py
+        run:     python dollar-pipeline/src/scraper.py "${{ github.event.inputs.reference_date }}"
