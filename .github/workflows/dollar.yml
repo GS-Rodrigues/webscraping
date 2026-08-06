@@ -27,7 +27,7 @@ jobs:
           DB_HOST: ${{ vars.DB_HOST }}
           DB_USER: ${{ vars.DB_USER }}
           DB_PASSWORD: ${{ vars.DB_PASSWORD }}
-          DB_NAME: ${{ vars.DB_NAME_DOLAR }}
+          DB_NAME: ${{ vars.DB_NAME }}
           DB_PORT: ${{ vars.DB_PORT }}
 
       - name: Run scraper
@@ -35,6 +35,6 @@ jobs:
           DB_HOST: ${{ vars.DB_HOST }}
           DB_USER: ${{ vars.DB_USER }}
           DB_PASSWORD: ${{ vars.DB_PASSWORD }}
-          DB_NAME: ${{ vars.DB_NAME_DOLAR }}
+          DB_NAME: ${{ vars.DB_NAME }}
           DB_PORT: ${{ vars.DB_PORT }}
         run: python dollar-pipeline/src/scraper.py
